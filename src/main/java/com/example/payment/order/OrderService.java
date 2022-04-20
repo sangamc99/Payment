@@ -31,18 +31,23 @@ public class OrderService {
     ResponseEntity<?> createOrder(OrderRequest request) {
         // TODO : create order from Razorpay check for success or failure , set status accordingly and return httpresp
     	
+    	double amt = Double.parseDouble(request.getPrice());
+    	amt *= 100;
+    	//System.out.println(amt);
+    	
+    	
         Order order = Order.builder()
                 .name(request.getName())
-                .price(Double.parseDouble(request.getPrice()))
+                .price(amt)
                 .status(OrderStatus.PROCESSING)
                 .build();
         orderRepository.save(order);
         
         try {
-        	
+        	       	
         	RazorpayClient razorpayClient = new RazorpayClient(key, secret);
         	JSONObject options = new JSONObject();
-        	options.put("amount", Double.parseDouble(request.getPrice()));
+        	options.put("amount", amt);
         	options.put("currency", "INR");
         	options.put("receipt", "txn_123456");
         	com.razorpay.Order order1 = razorpayClient.Orders.create(options);
