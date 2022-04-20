@@ -1,0 +1,18 @@
+<div id="form">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" placeholder="Enter Name" name="name" required ngModel>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <label>Price</label>
+      <input type="number" class="form-control" placeholder="Enter Price" name="price" required ngModel>
+    </div>
+    <br>
+
+    <button id="pay" type="submit" class="btn btn-primary">PAY</button>
+
+  </form>
+</div>
